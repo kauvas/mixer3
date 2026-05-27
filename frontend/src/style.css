@@ -7,10 +7,92 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #111827;
   color: #f9fafb;
+  display: flex;
+  flex-direction: column; /* mantem fluxo vertical: header no topo */
+  align-items: center;    /* centraliza horizontalmente */
+  justify-content: flex-start; /* empurra conteúdo para o topo */
+  padding-top: 24px; /* espaço entre topo da janela e o cabeçalho */
 }
 
+.cabecalho {
+  width: min(100%, 980px);
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* novo: estilos do header interno */
+.header-inner {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+  color: #c7d2fe;
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+  flex: 1 1 320px;
+  max-width: 480px;
+  align-items: center;
+}
+
+.search input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #374151;
+  background: #0f1724;
+  color: #f9fafb;
+}
+
+.search button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #7c3aed;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #d1d5db;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.nav-links a:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+.nav-links .btn-login {
+  background: #7c3aed;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* ...existing code... */
 .page {
-  min-height: 100vh;
+  /* reduzir a altura mínima para não empurrar o cabeçalho longe do topo */
+  min-height: auto;
   display: flex;
   align-items: center;
   justify-content: center;

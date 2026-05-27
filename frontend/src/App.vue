@@ -1,4 +1,23 @@
 <template>
+  <header class="cabecalho">
+    <div class="header-inner">
+      <div class="logo">🎬 Mixer</div>
+      
+      <div class="search">
+        <input type="text" placeholder="Pesquisar vídeos...">
+        <button>🔍</button>
+      </div>
+      
+      <nav class="nav-links">
+        <a href="#premium">Premium</a>
+        <a href="#suporte">Suporte</a>
+        <a href="#baixar">Baixar</a>
+        <a href="#app">App</a>
+        <a href="#login" class="btn-login">Entrar</a>
+      </nav>
+    </div>
+  </header>
+
   <main class="page">
     <section class="card">
       <p class="eyebrow">Vue + Node + HLS</p>
