@@ -14,22 +14,35 @@ app.use(cors());
 // CORREÇÃO 1: Apontar para a pasta 'audios' (não mais 'videos')
 const hlsPath = path.join(__dirname, 'audios', 'hls');
 
-// CORREÇÃO 2: Alterar a rota de '/stream' para '/audios/hls' para bater com o Vue
+app.use(cors());
+
+// LOG DE DEBUG: Vamos ver na janela do terminal o que o navegador está pedindo
 app.use('/audios/hls', (req, res, next) => {
-  if (req.path.endsWith('.m3u8')) {
-    res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
-  }
+    console.log(`[Requisição] Pedido recebido para: ${req.path}`);
+    console.log(`[Pasta Física] Procurando em: ${path.join(hlsPath, req.path)}`);
+    next();
+});
 
-  if (req.path.endsWith('.ts')) {
-    res.setHeader('Content-Type', 'video/mp2t');
-  }
-
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
+// Configuração nativa para o express.static reconhecer os tipos de arquivo
+express.static.mime.define({
+    'application/x-mpegURL': ['m3u8'],
+    'video/MP2T': ['ts'] 
 });
 
 // Entrega os arquivos estáticos na rota correta
-app.use('/audios/hls', express.static(hlsPath));
+// O express.static DEVE vir antes ou junto com os tratamentos de erro
+app.use('/audios/hls', express.static(hlsPath, {
+    setHeaders: (res, filePath) => {
+        // Garante CORS e Content-Type direto na entrega do arquivo estático
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        if (filePath.endsWith('.m3u8')) {
+            res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
+        }
+        if (filePath.endsWith('.ts')) {
+            res.setHeader('Content-Type', 'video/mp2t');
+        }
+    }
+}));
 
 app.get('/', (req, res) => {
   res.json({
