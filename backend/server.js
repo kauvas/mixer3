@@ -11,11 +11,11 @@ const PORT = 3000;
 
 app.use(cors());
 
-// Pasta onde ficam os arquivos HLS gerados pelo FFmpeg
-const hlsPath = path.join(__dirname, 'videos', 'hls');
+// CORREÇÃO 1: Apontar para a pasta 'audios' (não mais 'videos')
+const hlsPath = path.join(__dirname, 'audios', 'hls');
 
-// Headers importantes para HLS
-app.use('/stream', (req, res, next) => {
+// CORREÇÃO 2: Alterar a rota de '/stream' para '/audios/hls' para bater com o Vue
+app.use('/audios/hls', (req, res, next) => {
   if (req.path.endsWith('.m3u8')) {
     res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
   }
@@ -28,17 +28,18 @@ app.use('/stream', (req, res, next) => {
   next();
 });
 
-app.use('/stream', express.static(hlsPath));
+// Entrega os arquivos estáticos na rota correta
+app.use('/audios/hls', express.static(hlsPath));
 
 app.get('/', (req, res) => {
   res.json({
     message: 'Servidor HLS rodando',
     playerUrl: 'http://localhost:5173',
-    hlsUrl: 'http://localhost:3000/stream/index.m3u8'
+    hlsUrl: 'http://localhost:3000/audios/hls/index.m3u8' // Rota atualizada
   });
 });
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
-  console.log(`HLS em: http://localhost:${PORT}/stream/index.m3u8`);
+  console.log(`HLS em: http://localhost:${PORT}/audios/hls/index.m3u8`);
 });
