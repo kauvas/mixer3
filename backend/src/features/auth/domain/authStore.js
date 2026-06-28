@@ -1,13 +1,19 @@
 const users = new Map();
 const tokens = new Map();
 
+function createToken(email) {
+  const token = `token_${Math.random().toString(36).slice(2)}_${Date.now()}`;
+  tokens.set(token, email);
+  return token;
+}
+
 export function registerUser(email, password) {
   if (users.has(email)) {
     throw new Error('E-mail já cadastrado');
   }
 
   users.set(email, { email, password });
-  return { email };
+  return { token: createToken(email), email };
 }
 
 export function authenticateUser(email, password) {
@@ -17,9 +23,7 @@ export function authenticateUser(email, password) {
     throw new Error('Credenciais inválidas');
   }
 
-  const token = `token_${Math.random().toString(36).slice(2)}_${Date.now()}`;
-  tokens.set(token, email);
-  return { token, email };
+  return { token: createToken(email), email };
 }
 
 export function validateToken(token) {

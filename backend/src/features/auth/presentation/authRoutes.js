@@ -8,8 +8,8 @@ export function registerAuthRoutes(app) {
   router.post('/register', (req, res) => {
     try {
       const { email, password } = req.body;
-      const user = register({ email, password });
-      sendResponse(res, { user, message: 'Usuário cadastrado com sucesso' }, 201);
+      const session = register({ email, password });
+      sendResponse(res, { session, message: 'Usuário cadastrado com sucesso' }, 201);
     } catch (error) {
       sendResponse(res, { error: error.message }, 400);
     }

@@ -14,8 +14,9 @@
         <a href="#">Baixar</a>
         <span style="color: #444;">|</span>
         <a href="#">⬇️ Instalar aplicativo</a>
-        <a href="#">Inscrever-se</a>
-        <a href="#" class="btn-login">Entrar</a>
+        <span v-if="userEmail" class="user-pill">✅ {{ userEmail }}</span>
+        <button v-if="userEmail" class="btn-logout" @click="logout">Sair</button>
+        <a v-else href="#" class="btn-login">Entrar</a>
       </nav>
     </header>
 
@@ -64,6 +65,25 @@
             </BaseCard>
           </div>
         </section>
+
+        <section class="artists-section">
+          <div class="feed-section-header">
+            <h2>Artistas em destaque</h2>
+            <a href="#" class="view-all-link">Ver todos</a>
+          </div>
+
+          <div class="data-grid">
+            <BaseCard v-for="artist in featuredArtists" :key="artist.id" class="media-card artist-card">
+              <div class="card-cover artist-cover" :style="{ background: artist.gradient }">
+                <span>{{ artist.initials }}</span>
+              </div>
+              <div class="card-details">
+                <h4>{{ artist.name }}</h4>
+                <p>{{ artist.genre }}</p>
+              </div>
+            </BaseCard>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -74,18 +94,38 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import AudioPlayer from '../components/AudioPlayer.vue';
 import BaseCard from '../../../shared/components/BaseCard.vue';
 import { TRACKS } from '../services/audioService.js';
+import { clearSession, getStoredUser } from '../../auth/services/authService.js';
 
 const audioPlayerRef = ref(null);
 const tracks = TRACKS;
+const featuredArtists = [
+  { id: 1, name: 'Luna Vega', genre: 'Indie Pop', initials: 'LV', gradient: 'linear-gradient(135deg, #ff5f6d, #ffc371)' },
+  { id: 2, name: 'Niko Sol', genre: 'Lo-fi', initials: 'NS', gradient: 'linear-gradient(135deg, #3a7bd5, #00d2ff)' },
+  { id: 3, name: 'Maya Flux', genre: 'Eletrônica', initials: 'MF', gradient: 'linear-gradient(135deg, #8e2de2, #4a00e0)' },
+  { id: 4, name: 'Theo Rios', genre: 'Samba Pop', initials: 'TR', gradient: 'linear-gradient(135deg, #f12711, #f5af19)' }
+];
+const router = useRouter();
+const userEmail = ref('');
+
+onMounted(() => {
+  userEmail.value = getStoredUser() || '';
+});
 
 function playTrack(track) {
   if (audioPlayerRef.value?.loadAudio) {
     audioPlayerRef.value.loadAudio(track);
   }
+}
+
+function logout() {
+  clearSession();
+  userEmail.value = '';
+  router.push('/login');
 }
 </script>
 
@@ -116,6 +156,22 @@ function playTrack(track) {
 .header-nav { display: flex; align-items: center; gap: 20px; font-size: 14px; font-weight: bold; }
 .header-nav a { color: #b3b3b3; text-decoration: none; }
 .btn-login { background-color: white; color: black; padding: 10px 25px; border-radius: 20px; }
+.user-pill {
+  background: rgba(0, 153, 255, 0.18);
+  border: 1px solid rgba(0, 153, 255, 0.4);
+  color: #8fd1ff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.btn-logout {
+  background: transparent;
+  color: #ffb3b3;
+  border: 1px solid rgba(255, 179, 179, 0.4);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
 
 .app-body { display: flex; flex: 1; padding: 8px; gap: 8px; height: calc(100vh - 64px - 80px); }
 .sidebar { width: 300px; background-color: #120722; border-radius: 8px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
@@ -124,5 +180,15 @@ function playTrack(track) {
 .data-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
 .media-card { cursor: pointer; }
 .card-cover { margin-bottom: 12px; }
+.artist-section { margin-top: 24px; }
+.artist-card .artist-cover {
+  height: 120px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+}
 .main-footer { background: #120722; }
 </style>
