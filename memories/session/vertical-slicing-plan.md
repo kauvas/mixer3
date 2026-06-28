@@ -1,0 +1,5 @@
+- Reorganização concluída para vertical slicing no backend e frontend.
+- Backend agora usa feature-based folders: backend/src/features/audios/{domain,application,infrastructure,presentation} e shared utilities.
+- Frontend agora usa feature-based folders: frontend/src/features/player/{components,pages,services} e shared components/api.
+- Verificação feita: frontend build com npm --prefix frontend run build passou.
+- Verificação parcial do backend: dependências instaladas, mas a porta 3000 já estava ocupada por uma instância anterior.
