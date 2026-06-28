@@ -4,17 +4,31 @@ import Hls from 'hls.js';
 
 export const TRACKS = [
   {
-    id: 'audio1',
-    title: 'Audio 1',
-    subtitle: 'HLS gerado',
-    src: 'http://localhost:3000/audios/hls/audio1/index.m3u8',
+    id: 'AsItWas',
+    title: 'As it was',
+    subtitle: 'Harry Styles',
+    src: 'http://localhost:3000/audios/hls/AsItWas/index.m3u8',
     type: 'hls'
   },
   {
-    id: 'audio2',
-    title: 'Audio 2',
-    subtitle: 'HLS gerado',
-    src: 'http://localhost:3000/audios/hls/audio2/index.m3u8',
+    id: 'Flowers',
+    title: 'Flowers',
+    subtitle: 'Miley Cyrus',
+    src: 'http://localhost:3000/audios/hls/Flowers/index.m3u8',
+    type: 'hls'
+  },
+  {
+    id: 'LovinOnMe',
+    title: 'Lovin on me',
+    subtitle: 'Jack Harlow',
+    src: 'http://localhost:3000/audios/hls/LovinOnMe/index.m3u8',
+    type: 'hls'
+  },
+  {
+    id: 'TooSweet',
+    title: 'Too sweet',
+    subtitle: 'Hozier',
+    src: 'http://localhost:3000/audios/hls/TooSweet/index.m3u8',
     type: 'hls'
   }
 ];

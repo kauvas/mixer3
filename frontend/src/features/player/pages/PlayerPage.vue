@@ -104,10 +104,10 @@ import { clearSession, getStoredUser } from '../../auth/services/authService.js'
 const audioPlayerRef = ref(null);
 const tracks = TRACKS;
 const featuredArtists = [
-  { id: 1, name: 'Luna Vega', genre: 'Indie Pop', initials: 'LV', gradient: 'linear-gradient(135deg, #ff5f6d, #ffc371)' },
-  { id: 2, name: 'Niko Sol', genre: 'Lo-fi', initials: 'NS', gradient: 'linear-gradient(135deg, #3a7bd5, #00d2ff)' },
-  { id: 3, name: 'Maya Flux', genre: 'Eletrônica', initials: 'MF', gradient: 'linear-gradient(135deg, #8e2de2, #4a00e0)' },
-  { id: 4, name: 'Theo Rios', genre: 'Samba Pop', initials: 'TR', gradient: 'linear-gradient(135deg, #f12711, #f5af19)' }
+  { id: 1, name: 'Harry Styles', genre: 'Pop', initials: 'HS', gradient: 'linear-gradient(135deg, #ff5f6d, #ffc371)' },
+  { id: 2, name: 'Miley Cyrus', genre: 'Pop', initials: 'MC', gradient: 'linear-gradient(135deg, #3a7bd5, #00d2ff)' },
+  { id: 3, name: 'Jack Harlow', genre: 'Hip-Hop', initials: 'JH', gradient: 'linear-gradient(135deg, #8e2de2, #4a00e0)' },
+  { id: 4, name: 'Hozier', genre: 'Rock', initials: 'HZ', gradient: 'linear-gradient(135deg, #f12711, #f5af19)' }
 ];
 const router = useRouter();
 const userEmail = ref('');

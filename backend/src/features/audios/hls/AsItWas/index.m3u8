@@ -5,6 +5,14 @@
 #EXT-X-PLAYLIST-TYPE:VOD
 #EXTINF:6.013967,
 segment_000.ts
-#EXTINF:2.124289,
+#EXTINF:5.990756,
 segment_001.ts
+#EXTINF:6.013967,
+segment_002.ts
+#EXTINF:5.990744,
+segment_003.ts
+#EXTINF:5.990756,
+segment_004.ts
+#EXTINF:2.484189,
+segment_005.ts
 #EXT-X-ENDLIST
