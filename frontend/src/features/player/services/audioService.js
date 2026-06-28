@@ -1,26 +1,21 @@
 import Hls from 'hls.js';
 
+// Aqui toca as músicas
+
 export const TRACKS = [
   {
-    id: 'radio',
-    title: 'Rádio Ao Vivo',
-    subtitle: 'Testando HLS',
-    src: 'http://localhost:3000/audios/hls/index.m3u8',
+    id: 'audio1',
+    title: 'Audio 1',
+    subtitle: 'HLS gerado',
+    src: 'http://localhost:3000/audios/hls/audio1/index.m3u8',
     type: 'hls'
   },
   {
-    id: 'sunset',
-    title: 'Sunset Pulse',
-    subtitle: 'Sample 01',
-    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    type: 'audio'
-  },
-  {
-    id: 'ocean',
-    title: 'Ocean Drift',
-    subtitle: 'Sample 02',
-    src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    type: 'audio'
+    id: 'audio2',
+    title: 'Audio 2',
+    subtitle: 'HLS gerado',
+    src: 'http://localhost:3000/audios/hls/audio2/index.m3u8',
+    type: 'hls'
   }
 ];
 

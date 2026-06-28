@@ -1,7 +1,6 @@
 <template>
-  <PlayerPage />
+  <router-view />
 </template>
 
 <script setup>
-import PlayerPage from './features/player/pages/PlayerPage.vue';
 </script>
